@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="An idle clicker game where you evolve your robot and conquer the galaxy!">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <title>Droidor - Idle Robot Clicker</title>
+    <link rel="stylesheet" href="droidor2.css">
+</head>
+<body id="gameBody">
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <div class="title"><span id="titleIcon">🔩</span> DROIDOR</div>
+                <div class="prestige-badge" id="evolutionBadgeDiv" style="display: none;">
+                    🧬 <span id="evolutionBadge">0</span>
+                    <div class="prestige-tooltip">
+                        <div class="prestige-tooltip-title">Evolution Bonuses Active</div>
+                        <div id="evolutionTooltipContent"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">Energy</div>
+                    <div class="stat-value" id="energy">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Evolution</div>
+                    <div class="stat-value" style="font-size: 14px;" id="evolutionName">Rusty Prototype</div>
+                </div>
+            </div>
+            
+            <div class="production">
+                <span class="production-stat" id="clickPowerStat">
+                    Energy per click: <span class="green" id="clickPower">1</span>
+                    <div class="production-tooltip">
+                        <div class="production-tooltip-title">Click Power Breakdown</div>
+                        <div id="clickPowerTooltip"></div>
+                    </div>
+                </span>
+                <span class="production-stat" id="productionStat">
+                    Energy/s: <span class="cyan" id="perSecond">0</span>
+                    <div class="production-tooltip">
+                        <div class="production-tooltip-title">Production Breakdown</div>
+                        <div id="productionTooltip"></div>
+                    </div>
+                </span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('game')">🎮 Game</button>
+            <button class="tab" id="generatorsTab" onclick="showTab('generators')">🏭 Generators</button>
+            <button class="tab" id="upgradesTab" onclick="showTab('upgrades')">⚙️ Upgrades</button>
+            <button class="tab" id="evolutionTab" onclick="showTab('evolution')">🧬 Evolution</button>
+            <button class="tab" onclick="showTab('stats')">📊 Stats</button>
+            <button class="tab hidden" id="galaxyTab" onclick="showTab('galaxy')">🌌 Galaxy</button>
+        </div>
+
+        <div id="tab-game" class="content">
+            <div style="position: relative; display: flex; justify-content: center;">
+                <button class="click-button" onclick="handleClick(event)" id="clickBtn">🔩</button>
+            </div>
+            <div class="click-text">Click to generate energy!</div>
+            
+            <div style="margin-top: 30px;" id="genSummarySection">
+                <div class="section-title">Active Generators</div>
+                <div class="gen-summary" id="genSummary"></div>
+            </div>
+        </div>
+
+        <div id="tab-generators" class="content hidden">
+            <div class="section-title">🏭 Generators</div>
+            <div id="generatorsList"></div>
+        </div>
+
+        <div id="tab-upgrades" class="content hidden">
+            <div class="section-title">⚙️ Upgrades</div>
+            <div id="upgradesList"></div>
+        </div>
+
+        <div id="tab-evolution" class="content hidden">
+            <div class="section-title">🧬 Evolution</div>
+            
+            <div class="prestige-box" onclick="handlePrestigeClick()">
+                <div class="prestige-level">Evolution <span id="evolutionLevel">0</span></div>
+                <div style="font-size: 12px; color: #94a3b8;">
+                    Current: <span id="evolutionName2">Rusty Prototype</span>
+                </div>
+                <div id="secretCounter" style="font-size: 10px; color: #a78bfa; margin-top: 8px;"></div>
+            </div>
+            
+            <div id="nextEvolutionBox">
+                <!-- Next evolution info will be rendered here by JavaScript -->
+            </div>
+            
+            <div id="completedEvolutionsSection" style="display: none; margin-top: 20px;">
+                <div style="font-size: 18px; font-weight: bold; margin-bottom: 12px; color: #93c5fd;">✅ Completed Evolutions</div>
+                <div id="completedEvolutionsList">
+                    <!-- Completed evolutions will be rendered here by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-galaxy" class="content hidden">
+            <div class="section-title">🌌 Galaxy Conquest</div>
+            
+            <div id="lockMsg" style="background: rgba(239, 68, 68, 0.2); padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                <div style="font-size: 32px;">🔒</div>
+                <div style="font-size: 18px; font-weight: bold; margin: 10px 0;">Galaxy Map Locked</div>
+                <div style="font-size: 14px;">Reach Evolution 10 to conquer!</div>
+                <div style="font-size: 12px; color: #94a3b8; margin-top: 8px;">
+                    Current: <span id="galEvolution">0</span> / 10
+                </div>
+            </div>
+            
+            <div id="planetsList"></div>
+        </div>
+
+        <div id="tab-stats" class="content hidden">
+            <div class="section-title">📊 Statistics & Bonuses</div>
+            
+            <div class="card" style="margin-bottom: 20px;">
+                <div class="card-title" style="margin-bottom: 15px;">Click Power Breakdown</div>
+                <div id="clickBreakdown"></div>
+            </div>
+            
+            <div class="card" style="margin-bottom: 20px;">
+                <div class="card-title" style="margin-bottom: 15px;">Production Multiplier Breakdown</div>
+                <div id="prodBreakdown"></div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title" style="margin-bottom: 15px;">🏆 Achievements Progress</div>
+                <div id="achievementsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="droidor2.js"></script>
+</body>
+</html>
