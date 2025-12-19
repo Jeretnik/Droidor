@@ -1,0 +1,892 @@
+/* Droidor Game Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #0f172a;
+    color: #fff;
+    overflow-x: hidden;
+    transition: background 1s ease;
+    min-height: 100vh;
+}
+
+/* Animated Starfield */
+#starfield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    background: rgba(30, 41, 59, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    margin-bottom: 20px;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.prestige-badge {
+    background: rgba(234, 179, 8, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #facc15;
+    font-weight: bold;
+    cursor: help;
+    position: relative;
+}
+
+.prestige-badge:hover .prestige-tooltip {
+    display: block;
+}
+
+.prestige-tooltip {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: rgba(30, 41, 59, 0.98);
+    border: 2px solid rgba(234, 179, 8, 0.5);
+    border-radius: 8px;
+    padding: 12px;
+    min-width: 250px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.prestige-tooltip-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #facc15;
+    margin-bottom: 8px;
+}
+
+.prestige-tooltip-item {
+    font-size: 11px;
+    color: #cbd5e1;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.stat-box {
+    background: rgba(59, 130, 246, 0.2);
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: #93c5fd;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.production {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #cbd5e1;
+}
+
+.production-stat {
+    position: relative;
+    cursor: help;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.production-stat:hover {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.production-stat:hover .production-tooltip {
+    display: block;
+}
+
+.production-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    background: rgba(30, 41, 59, 0.98);
+    border: 2px solid rgba(59, 130, 246, 0.5);
+    border-radius: 8px;
+    padding: 12px;
+    min-width: 220px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+}
+
+.production-tooltip-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #93c5fd;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+    padding-bottom: 4px;
+}
+
+.production-tooltip-item {
+    font-size: 11px;
+    color: #cbd5e1;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.production-tooltip-label {
+    color: #94a3b8;
+}
+
+.production-tooltip-value {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px;
+    background: rgba(30, 41, 59, 0.3);
+    border: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+}
+
+.tab.active {
+    background: #1e293b;
+    color: #fff;
+}
+
+.tab-notification {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.content {
+    padding: 20px;
+}
+
+.click-button {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #3b82f6;
+    border: none;
+    font-size: 100px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+    box-shadow: 0 10px 40px rgba(59, 130, 246, 0.5);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    animation: robotIdle 3s ease-in-out infinite;
+}
+
+@keyframes robotIdle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(1deg); }
+}
+
+@keyframes robotPulse {
+    0%, 100% { box-shadow: 0 10px 40px rgba(59, 130, 246, 0.5); }
+    50% { box-shadow: 0 10px 60px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.4); }
+}
+
+.click-button.pulse {
+    animation: robotIdle 3s ease-in-out infinite, robotPulse 1.5s ease-in-out infinite;
+}
+
+.click-button:active {
+    transform: scale(1.08);
+    transition: transform 0.15s ease-out;
+    animation: none;
+}
+
+.click-text {
+    text-align: center;
+    font-size: 18px;
+    color: #cbd5e1;
+    margin-top: 20px;
+}
+
+.floating-number {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4ade80;
+    pointer-events: none;
+    animation: float-up 1s ease-out forwards;
+    text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+    z-index: 1001;
+}
+
+@keyframes float-up {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-100px); }
+}
+
+/* Click particles */
+.click-particle {
+    transition: none;
+}
+
+.click-particle.particle-animate {
+    animation: particle-burst 0.6s ease-out forwards;
+}
+
+@keyframes particle-burst {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--endX), var(--endY)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Screen shake for big purchases */
+@keyframes screen-shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+    20%, 40%, 60%, 80% { transform: translateX(3px); }
+}
+
+.shake {
+    animation: screen-shake 0.4s ease-out;
+}
+
+.card {
+    background: rgba(51, 65, 85, 0.5);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+}
+
+.card.unlocked {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.5);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-icon {
+    font-size: 36px;
+    margin-right: 12px;
+}
+
+.card-info {
+    flex: 1;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.card-subtitle {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 2px;
+}
+
+.buy-button {
+    padding: 12px;
+    background: #3b82f6;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.buy-button:not(:disabled) {
+    animation: affordable-pulse 1.5s ease-in-out infinite alternate;
+}
+
+.buy-button:not(:disabled):hover {
+    transform: scale(1.02);
+    animation: none;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+}
+
+@keyframes affordable-pulse {
+    0% { 
+        box-shadow: 0 0 4px rgba(59, 130, 246, 0.2); 
+    }
+    100% { 
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.7), 0 0 35px rgba(59, 130, 246, 0.3); 
+    }
+}
+
+.buy-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    animation: none;
+}
+
+/* Buy Multiplier Toggle */
+.buy-mult-btn {
+    padding: 8px 16px;
+    background: rgba(51, 65, 85, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 6px;
+    color: #94a3b8;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.buy-mult-btn:hover {
+    background: rgba(71, 85, 105, 0.8);
+    color: #e2e8f0;
+}
+
+.buy-mult-btn.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+.hidden {
+    display: none;
+}
+
+.green {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.cyan {
+    color: #22d3ee;
+    font-weight: bold;
+}
+
+.yellow {
+    color: #facc15;
+    font-weight: bold;
+}
+
+.mult {
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.prestige-box {
+    background: rgba(234, 179, 8, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(234, 179, 8, 0.3);
+    text-align: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.prestige-box:hover {
+    transform: scale(1.02);
+}
+
+.prestige-level {
+    font-size: 32px;
+    font-weight: bold;
+    color: #facc15;
+    margin-bottom: 8px;
+}
+
+.planet-card {
+    background: rgba(51, 65, 85, 0.5);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.planet-card.conquered {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.5);
+}
+
+.gen-summary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.gen-card {
+    background: rgba(51, 65, 85, 0.5);
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    width: 140px;
+    flex-shrink: 0;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.empty-state {
+    background: rgba(51, 65, 85, 0.5);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px dashed rgba(59, 130, 246, 0.3);
+}
+
+.achievement-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.95), rgba(22, 163, 74, 0.95));
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    z-index: 1000;
+    min-width: 300px;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(400px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.achievement-popup.hiding {
+    animation: slideOut 0.3s ease-out forwards;
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(400px); opacity: 0; }
+}
+
+.offline-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(37, 99, 235, 0.95));
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    z-index: 2000;
+    min-width: 350px;
+    text-align: center;
+    animation: popIn 0.4s ease-out;
+}
+
+@keyframes popIn {
+    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.offline-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1999;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ==================== MOBILE RESPONSIVE STYLES ==================== */
+
+/* Tablets and smaller */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header {
+        padding: 15px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+    
+    .stats {
+        gap: 8px;
+    }
+    
+    .stat-box {
+        padding: 10px;
+    }
+    
+    .stat-value {
+        font-size: 16px;
+    }
+    
+    .tabs {
+        gap: 3px;
+    }
+    
+    .tab {
+        min-width: 60px;
+        padding: 8px 4px;
+        font-size: 11px;
+    }
+    
+    .content {
+        padding: 10px;
+    }
+    
+    .click-button {
+        width: 160px;
+        height: 160px;
+        font-size: 80px;
+        margin: 20px auto;
+    }
+    
+    .section-title {
+        font-size: 18px;
+    }
+    
+    .card {
+        padding: 12px;
+    }
+    
+    .card-icon {
+        font-size: 28px;
+        margin-right: 10px;
+    }
+    
+    .card-title {
+        font-size: 14px;
+    }
+    
+    .gen-summary {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 8px;
+    }
+    
+    .gen-card {
+        padding: 8px;
+    }
+    
+    .achievement-popup {
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+        padding: 15px;
+    }
+    
+    .offline-popup {
+        min-width: auto;
+        width: 90%;
+        max-width: 350px;
+        padding: 20px;
+    }
+    
+    .production-tooltip {
+        min-width: 180px;
+        left: 0;
+        transform: none;
+    }
+    
+    .prestige-tooltip {
+        min-width: 200px;
+    }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+    .container {
+        padding: 8px;
+    }
+    
+    .header {
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+    
+    .header-top {
+        margin-bottom: 10px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+    
+    .prestige-badge {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+    
+    .stats {
+        gap: 6px;
+    }
+    
+    .stat-box {
+        padding: 8px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+    }
+    
+    .stat-value {
+        font-size: 14px;
+    }
+    
+    .production {
+        font-size: 11px;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .production-stat {
+        padding: 2px 4px;
+    }
+    
+    .tabs {
+        gap: 2px;
+        margin-bottom: 10px;
+    }
+    
+    .tab {
+        min-width: 50px;
+        padding: 8px 2px;
+        font-size: 10px;
+    }
+    
+    .tab-notification {
+        width: 16px;
+        height: 16px;
+        font-size: 9px;
+        top: -5px;
+        right: -5px;
+    }
+    
+    .content {
+        padding: 8px;
+    }
+    
+    .click-button {
+        width: 140px;
+        height: 140px;
+        font-size: 70px;
+        margin: 15px auto;
+    }
+    
+    .click-text {
+        font-size: 14px;
+        margin-top: 15px;
+    }
+    
+    .floating-number {
+        font-size: 18px;
+    }
+    
+    .section-title {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .card {
+        padding: 10px;
+        margin-bottom: 8px;
+    }
+    
+    .card-icon {
+        font-size: 24px;
+        margin-right: 8px;
+    }
+    
+    .card-title {
+        font-size: 13px;
+    }
+    
+    .card-subtitle {
+        font-size: 11px;
+    }
+    
+    .buy-button {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .gen-summary {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+    
+    .gen-card {
+        padding: 6px;
+    }
+    
+    .prestige-box {
+        padding: 15px;
+    }
+    
+    .prestige-level {
+        font-size: 24px;
+    }
+    
+    .planet-card {
+        padding: 10px;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .empty-state {
+        padding: 20px;
+    }
+    
+    .achievement-popup {
+        top: 10px;
+        right: 5px;
+        left: 5px;
+        padding: 12px;
+    }
+    
+    .offline-popup {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    /* Fix flex layouts on mobile for upgrade cards */
+    .card > div[style*="display: flex"][style*="justify-content: space-between"] {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .card > div[style*="display: flex"] > div[style*="text-align: right"] {
+        text-align: left !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+    .buy-button {
+        min-height: 44px;
+    }
+    
+    .tab {
+        min-height: 40px;
+    }
+    
+    .click-button {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Show tooltips on tap instead of hover */
+    .production-stat:active .production-tooltip,
+    .prestige-badge:active .prestige-tooltip {
+        display: block;
+    }
+}
+
+/* Prevent zoom on input focus (iOS) */
+@media (max-width: 480px) {
+    input, select, textarea {
+        font-size: 16px;
+    }
+}
