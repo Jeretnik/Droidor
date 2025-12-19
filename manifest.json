@@ -1,10 +1,8 @@
 {
-  "name": "Droidor - Idle Robot Clicker",
+  "name": "Droidor",
   "short_name": "Droidor",
-  "description": "An idle clicker game where you evolve your robot and conquer the galaxy!",
-  "start_url": "/droidor2.html",
+  "start_url": "/droidor-game/",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
   "icons": [
